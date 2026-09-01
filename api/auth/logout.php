@@ -1,7 +1,7 @@
 <?php
 
-require '../helpers/response.php';
-require '../helpers/auth.php';
+require_once '../helpers/response.php';
+require_once '../helpers/auth.php';
 
 startSession();
 session_destroy();
