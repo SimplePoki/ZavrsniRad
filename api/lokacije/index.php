@@ -27,13 +27,12 @@ if ($method === 'POST') {
         jsonResponse(['error' => 'Naziv i tip su obavezni'], 400);
     }
 
-    $stmt = $conn->prepare('INSERT INTO lokacije (parent_id, naziv, tip) VALUES (:parent_id, :naziv, :tip) RETURNING id');
-    $stmt->execute([
-        'parent_id' => $parent_id,
-        'naziv' => $naziv,
-        'tip' => $tip
-    ]);
-    $noviId = $stmt->fetchColumn();
+    $stmt = $conn->prepare('INSERT INTO lokacije (parent_id, naziv, tip) VALUES (:parent_id, :naziv, :tip) RETURNING id INTO :id');
+    $stmt->bindParam('parent_id', $parent_id);
+    $stmt->bindParam('naziv', $naziv);
+    $stmt->bindParam('tip', $tip);
+    $stmt->bindParam('id', $noviId, PDO::PARAM_INT, 20);
+    $stmt->execute();
 
     jsonResponse(['id' => $noviId, 'parent_id' => $parent_id, 'naziv' => $naziv, 'tip' => $tip], 201);
 }

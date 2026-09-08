@@ -38,28 +38,30 @@ if ($method === 'POST') {
         jsonResponse(['error' => 'Mora biti unesena barem jedna vrijednost (broj, tekst, da/ne ili opis)'], 400);
     }
 
+    $izvrsio_id = $trenutniKorisnik['id'];
+    $vrijednost_bool_db = $vrijednost_bool === null ? null : ($vrijednost_bool ? 1 : 0);
+
     try {
-        $stmt = $conn->prepare('INSERT INTO evidencije (umirovljenik_id, lokacija_id, izvrsio_id, akcija_tip_id, akcija_id, vrijednost_num, vrijednost_string, vrijednost_bool, opis) VALUES (:umirovljenik_id, :lokacija_id, :izvrsio_id, :akcija_tip_id, :akcija_id, :vrijednost_num, :vrijednost_string, :vrijednost_bool, :opis) RETURNING id, datum_vrijeme');
-        $stmt->execute([
-            'umirovljenik_id' => $umirovljenik_id,
-            'lokacija_id' => $lokacija_id,
-            'izvrsio_id' => $trenutniKorisnik['id'],
-            'akcija_tip_id' => $akcija_tip_id,
-            'akcija_id' => $akcija_id,
-            'vrijednost_num' => $vrijednost_num,
-            'vrijednost_string' => $vrijednost_string,
-            'vrijednost_bool' => $vrijednost_bool,
-            'opis' => $opis
-        ]);
+        $stmt = $conn->prepare('INSERT INTO evidencije (umirovljenik_id, lokacija_id, izvrsio_id, akcija_tip_id, akcija_id, vrijednost_num, vrijednost_string, vrijednost_bool, opis) VALUES (:umirovljenik_id, :lokacija_id, :izvrsio_id, :akcija_tip_id, :akcija_id, :vrijednost_num, :vrijednost_string, :vrijednost_bool, :opis) RETURNING id, datum_vrijeme INTO :id, :datum_vrijeme');
+        $stmt->bindParam('umirovljenik_id', $umirovljenik_id);
+        $stmt->bindParam('lokacija_id', $lokacija_id);
+        $stmt->bindParam('izvrsio_id', $izvrsio_id);
+        $stmt->bindParam('akcija_tip_id', $akcija_tip_id);
+        $stmt->bindParam('akcija_id', $akcija_id);
+        $stmt->bindParam('vrijednost_num', $vrijednost_num);
+        $stmt->bindParam('vrijednost_string', $vrijednost_string);
+        $stmt->bindParam('vrijednost_bool', $vrijednost_bool_db);
+        $stmt->bindParam('opis', $opis);
+        $stmt->bindParam('id', $noviId, PDO::PARAM_INT, 20);
+        $stmt->bindParam('datum_vrijeme', $novoDatumVrijeme, PDO::PARAM_STR, 50);
+        $stmt->execute();
     } catch (PDOException $e) {
         jsonResponse(['error' => 'Neispravni podaci (provjeri postoji li odabrana akcija/tip)'], 409);
     }
 
-    $nova = $stmt->fetch(PDO::FETCH_ASSOC);
-
     jsonResponse([
-        'id' => $nova['id'],
-        'datum_vrijeme' => $nova['datum_vrijeme'],
+        'id' => $noviId,
+        'datum_vrijeme' => $novoDatumVrijeme,
         'umirovljenik_id' => $umirovljenik_id,
         'lokacija_id' => $lokacija_id,
         'izvrsio_id' => $trenutniKorisnik['id'],

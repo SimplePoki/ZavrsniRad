@@ -28,13 +28,15 @@ if ($method === 'POST') {
     }
 
     try {
-        $stmt = $conn->prepare('INSERT INTO smjene (korisnik_id, datum, smjena) VALUES (:korisnik_id, :datum, :smjena) RETURNING id');
-        $stmt->execute(['korisnik_id' => $korisnik_id, 'datum' => $datum, 'smjena' => $smjena]);
+        $stmt = $conn->prepare('INSERT INTO smjene (korisnik_id, datum, smjena) VALUES (:korisnik_id, :datum, :smjena) RETURNING id INTO :id');
+        $stmt->bindParam('korisnik_id', $korisnik_id);
+        $stmt->bindParam('datum', $datum);
+        $stmt->bindParam('smjena', $smjena);
+        $stmt->bindParam('id', $noviId, PDO::PARAM_INT, 20);
+        $stmt->execute();
     } catch (PDOException $e) {
         jsonResponse(['error' => 'Neispravan korisnik_id'], 409);
     }
-
-    $noviId = $stmt->fetchColumn();
 
     jsonResponse(['id' => $noviId, 'korisnik_id' => $korisnik_id, 'datum' => $datum, 'smjena' => $smjena], 201);
 }

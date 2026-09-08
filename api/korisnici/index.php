@@ -32,19 +32,17 @@ if ($method === 'POST') {
     $hashLozinke = password_hash($lozinka, PASSWORD_DEFAULT);
 
     try {
-        $stmt = $conn->prepare('INSERT INTO korisnik (ime, prezime, email, lozinka, uloga) VALUES (:ime, :prezime, :email, :lozinka, :uloga) RETURNING id');
-        $stmt->execute([
-            'ime' => $ime,
-            'prezime' => $prezime,
-            'email' => $email,
-            'lozinka' => $hashLozinke,
-            'uloga' => $uloga
-        ]);
+        $stmt = $conn->prepare('INSERT INTO korisnik (ime, prezime, email, lozinka, uloga) VALUES (:ime, :prezime, :email, :lozinka, :uloga) RETURNING id INTO :id');
+        $stmt->bindParam('ime', $ime);
+        $stmt->bindParam('prezime', $prezime);
+        $stmt->bindParam('email', $email);
+        $stmt->bindParam('lozinka', $hashLozinke);
+        $stmt->bindParam('uloga', $uloga);
+        $stmt->bindParam('id', $noviId, PDO::PARAM_INT, 20);
+        $stmt->execute();
     } catch (PDOException $e) {
         jsonResponse(['error' => 'Korisnik s tim emailom već postoji'], 409);
     }
-
-    $noviId = $stmt->fetchColumn();
 
     jsonResponse(['id' => $noviId, 'ime' => $ime, 'prezime' => $prezime, 'email' => $email, 'uloga' => $uloga], 201);
 }

@@ -51,7 +51,7 @@ if ($method === 'PUT') {
 if ($method === 'DELETE') {
     requireMaxRole(ROLE_SUPERADMIN);
 
-    $stmt = $conn->prepare('UPDATE tip_evidencije SET aktivan = false WHERE id = :id');
+    $stmt = $conn->prepare('UPDATE tip_evidencije SET aktivan = 0 WHERE id = :id');
     $stmt->execute(['id' => $id]);
 
     if ($stmt->rowCount() === 0) {

@@ -40,11 +40,13 @@ if ($method === 'PUT') {
         jsonResponse(['error' => 'Mora biti unesena barem jedna vrijednost'], 400);
     }
 
+    $vrijednost_bool_db = $vrijednost_bool === null ? null : ($vrijednost_bool ? 1 : 0);
+
     $stmt = $conn->prepare('UPDATE evidencije SET vrijednost_num = :vrijednost_num, vrijednost_string = :vrijednost_string, vrijednost_bool = :vrijednost_bool, opis = :opis WHERE id = :id');
     $stmt->execute([
         'vrijednost_num' => $vrijednost_num,
         'vrijednost_string' => $vrijednost_string,
-        'vrijednost_bool' => $vrijednost_bool,
+        'vrijednost_bool' => $vrijednost_bool_db,
         'opis' => $opis,
         'id' => $id
     ]);
