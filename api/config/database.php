@@ -20,6 +20,12 @@ try {
 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conn->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+
+    // Oracle inače vraća datume u NLS lokalnom formatu (npr. "01-JUN-26...")
+    // koji JS `new Date()` ne zna parsirati - forsiramo ISO 8601 na sesiji.
+    $conn->exec("ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD\"T\"HH24:MI:SS'");
+    $conn->exec("ALTER SESSION SET NLS_TIMESTAMP_FORMAT = 'YYYY-MM-DD\"T\"HH24:MI:SS.FF3'");
+    $conn->exec("ALTER SESSION SET NLS_TIMESTAMP_TZ_FORMAT = 'YYYY-MM-DD\"T\"HH24:MI:SS.FF3TZH:TZM'");
 } catch (PDOException $e) {
     http_response_code(500);
     header('Content-Type: application/json');
