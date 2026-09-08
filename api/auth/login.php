@@ -15,7 +15,7 @@ if ($email === null || $lozinka === null) {
     jsonResponse(['error' => 'Email i lozinka su obavezni'], 400);
 }
 
-$stmt = $conn->prepare('SELECT id, ime, prezime, lozinka, uloga FROM korisnik WHERE email = :email AND aktivan = true');
+$stmt = $conn->prepare('SELECT id, ime, prezime, lozinka, uloga FROM korisnik WHERE email = :email AND aktivan = 1');
 $stmt->execute(['email' => $email]);
 $korisnik = $stmt->fetch(PDO::FETCH_ASSOC);
 

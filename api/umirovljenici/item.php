@@ -57,7 +57,7 @@ if ($method === 'PUT') {
 if ($method === 'DELETE') {
     requireMaxRole(ROLE_ADMIN);
 
-    $stmt = $conn->prepare('UPDATE umirovljenik SET aktivan = false WHERE id = :id');
+    $stmt = $conn->prepare('UPDATE umirovljenik SET aktivan = 0 WHERE id = :id');
     $stmt->execute(['id' => $id]);
 
     if ($stmt->rowCount() === 0) {

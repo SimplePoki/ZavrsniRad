@@ -27,13 +27,12 @@ if ($method === 'POST') {
         jsonResponse(['error' => 'Ime, prezime i lokacija_id su obavezni'], 400);
     }
 
-    $stmt = $conn->prepare('INSERT INTO umirovljenik (ime, prezime, lokacija_id) VALUES (:ime, :prezime, :lokacija_id) RETURNING id');
-    $stmt->execute([
-        'ime' => $ime,
-        'prezime' => $prezime,
-        'lokacija_id' => $lokacija_id
-    ]);
-    $noviId = $stmt->fetchColumn();
+    $stmt = $conn->prepare('INSERT INTO umirovljenik (ime, prezime, lokacija_id) VALUES (:ime, :prezime, :lokacija_id) RETURNING id INTO :id');
+    $stmt->bindParam('ime', $ime);
+    $stmt->bindParam('prezime', $prezime);
+    $stmt->bindParam('lokacija_id', $lokacija_id);
+    $stmt->bindParam('id', $noviId, PDO::PARAM_INT, 20);
+    $stmt->execute();
 
     jsonResponse(['id' => $noviId, 'ime' => $ime, 'prezime' => $prezime, 'lokacija_id' => $lokacija_id], 201);
 }
