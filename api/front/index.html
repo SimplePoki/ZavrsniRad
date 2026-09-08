@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<title>Dom — Evidencija njege</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-title">Dom &middot; Evidencija njege</div>
+  <div class="topbar-user">
+    <div class="avatar" id="avatar">?</div>
+    <div class="user-info">
+      <span id="userIme">Učitavanje&hellip;</span>
+      <span id="userUloga"></span>
+    </div>
+    <div class="divider"></div>
+    <button id="logoutBtn" class="btn btn-secondary btn-small">Odjava</button>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <a href="#umirovljenici" class="nav-item" data-route="umirovljenici">Umirovljenici</a>
+    <a href="#lokacije" class="nav-item" data-route="lokacije">Lokacije</a>
+    <a href="#korisnici" class="nav-item" data-route="korisnici">Korisnici</a>
+    <a href="#tip_evidencije" class="nav-item" data-route="tip_evidencije">Tipovi evidencije</a>
+    <a href="#akcije" class="nav-item" data-route="akcije">Akcije</a>
+    <a href="#posjeti" class="nav-item" data-route="posjeti">Posjeti</a>
+    <a href="#smjene" class="nav-item" data-route="smjene">Smjene</a>
+    <a href="#evidencije" class="nav-item" data-route="evidencije">Evidencije</a>
+  </div>
+
+  <div class="content" id="content">
+    <p>Učitavanje&hellip;</p>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/permissions.js"></script>
+<script src="js/pages/umirovljenici.js"></script>
+<script src="js/pages/lokacije.js"></script>
+<script src="js/pages/korisnici.js"></script>
+<script src="js/pages/tip_evidencije.js"></script>
+<script src="js/pages/akcije.js"></script>
+<script src="js/pages/posjeti.js"></script>
+<script src="js/pages/smjene.js"></script>
+<script src="js/pages/evidencije.js"></script>
+<script src="js/router.js"></script>
+<script>
+(async function () {
+    const rez = await trenutniKorisnik();
+    if (!rez.ok) {
+        window.location.href = 'login.html';
+        return;
+    }
+    document.getElementById('userIme').textContent = rez.data.ime + ' ' + rez.data.prezime;
+    const uloge = { 1: 'SuperAdmin', 2: 'Admin', 3: 'Doktor', 4: 'Sestra' };
+    document.getElementById('userUloga').textContent = uloge[rez.data.uloga] || '';
+    document.getElementById('avatar').textContent = (rez.data.ime[0] + rez.data.prezime[0]).toUpperCase();
+
+    document.querySelectorAll('.nav-item').forEach(function (el) {
+        if (!smijeVidjeti(el.dataset.route, rez.data.uloga)) {
+            el.remove();
+        }
+    });
+
+    prikaziStranicu();
+})();
+
+document.getElementById('logoutBtn').addEventListener('click', async function () {
+    await odjava();
+    window.location.href = 'login.html';
+});
+</script>
+
+</body>
+</html>
