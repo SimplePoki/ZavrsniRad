@@ -15,13 +15,18 @@ if ($email === null || $lozinka === null) {
     jsonResponse(['error' => 'Email i lozinka su obavezni'], 400);
 }
 
-$stmt = $conn->prepare('SELECT id, ime, prezime, lozinka, uloga FROM korisnik WHERE email = :email AND aktivan = true');
+$stmt = $conn->prepare('SELECT id, ime, prezime, lozinka, uloga FROM korisnik WHERE email = :email AND aktivan = 1');
 $stmt->execute(['email' => $email]);
 $korisnik = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($korisnik === false || !password_verify($lozinka, $korisnik['lozinka'])) {
     jsonResponse(['error' => 'Pogrešan email ili lozinka'], 401);
 }
+
+// Oracle (PDO_OCI) vraća NUMBER stupce kao string; frontend radi strogu
+// usporedbu tipova (Array.includes) nad ulogom pa mora doći kao broj.
+$korisnik['id'] = (int) $korisnik['id'];
+$korisnik['uloga'] = (int) $korisnik['uloga'];
 
 $_SESSION['korisnik'] = [
     'id' => $korisnik['id'],

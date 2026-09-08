@@ -26,15 +26,16 @@ if ($method === 'POST') {
         jsonResponse(['error' => 'umirovljenik_id, ime, prezime i datum su obavezni'], 400);
     }
 
-    $stmt = $conn->prepare('INSERT INTO posjeti (umirovljenik_id, ime, prezime, datum, upisao_id) VALUES (:umirovljenik_id, :ime, :prezime, :datum, :upisao_id) RETURNING id');
-    $stmt->execute([
-        'umirovljenik_id' => $umirovljenik_id,
-        'ime' => $ime,
-        'prezime' => $prezime,
-        'datum' => $datum,
-        'upisao_id' => $trenutniKorisnik['id']
-    ]);
-    $noviId = $stmt->fetchColumn();
+    $upisao_id = $trenutniKorisnik['id'];
+
+    $stmt = $conn->prepare('INSERT INTO posjeti (umirovljenik_id, ime, prezime, datum, upisao_id) VALUES (:umirovljenik_id, :ime, :prezime, :datum, :upisao_id) RETURNING id INTO :id');
+    $stmt->bindParam('umirovljenik_id', $umirovljenik_id);
+    $stmt->bindParam('ime', $ime);
+    $stmt->bindParam('prezime', $prezime);
+    $stmt->bindParam('datum', $datum);
+    $stmt->bindParam('upisao_id', $upisao_id);
+    $stmt->bindParam('id', $noviId, PDO::PARAM_INT, 20);
+    $stmt->execute();
 
     jsonResponse(['id' => $noviId, 'umirovljenik_id' => $umirovljenik_id, 'ime' => $ime, 'prezime' => $prezime, 'datum' => $datum, 'upisao_id' => $trenutniKorisnik['id']], 201);
 }

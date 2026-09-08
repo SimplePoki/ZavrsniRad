@@ -6,18 +6,20 @@ Env::load(__DIR__.'/../../.env');
 
 $host = $_ENV['DB_HOST'];
 $port = $_ENV['DB_PORT'];
-$dbname = $_ENV['DB_NAME'];
+$service = $_ENV['DB_SERVICE'];
 $user = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASSWORD'];
+$charset = $_ENV['DB_CHARSET'] ?? 'AL32UTF8';
 
 try {
     $conn = new PDO(
-        "pgsql:host=$host;port=$port;dbname=$dbname",
+        "oci:dbname=//$host:$port/$service;charset=$charset",
         $user,
         $password
     );
 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 } catch (PDOException $e) {
     http_response_code(500);
     header('Content-Type: application/json');
