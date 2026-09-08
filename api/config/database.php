@@ -19,6 +19,7 @@ try {
     );
 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 } catch (PDOException $e) {
     http_response_code(500);
     header('Content-Type: application/json');

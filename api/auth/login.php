@@ -23,6 +23,11 @@ if ($korisnik === false || !password_verify($lozinka, $korisnik['lozinka'])) {
     jsonResponse(['error' => 'Pogrešan email ili lozinka'], 401);
 }
 
+// Oracle (PDO_OCI) vraća NUMBER stupce kao string; frontend radi strogu
+// usporedbu tipova (Array.includes) nad ulogom pa mora doći kao broj.
+$korisnik['id'] = (int) $korisnik['id'];
+$korisnik['uloga'] = (int) $korisnik['uloga'];
+
 $_SESSION['korisnik'] = [
     'id' => $korisnik['id'],
     'ime' => $korisnik['ime'],
