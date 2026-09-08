@@ -211,6 +211,567 @@
                     }
                 }
             ]
+        },
+        {
+            "name": "Lokacije",
+            "item": [
+                {
+                    "name": "Lista",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/lokacije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["lokacije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"parent_id\": null,\n    \"naziv\": \"Test soba\",\n    \"tip\": 4\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/lokacije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["lokacije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Pojedinačno",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/lokacije/item.php?id={{lokacijaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["lokacije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{lokacijaId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Uredi",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"parent_id\": null,\n    \"naziv\": \"Izmijenjena soba\",\n    \"tip\": 4\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/lokacije/item.php?id={{lokacijaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["lokacije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{lokacijaId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Obriši",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/lokacije/item.php?id={{lokacijaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["lokacije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{lokacijaId}}" }]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Tip evidencije",
+            "item": [
+                {
+                    "name": "Lista",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/tip_evidencije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tip_evidencije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"id\": 99,\n    \"naziv\": \"Test tip\",\n    \"opis\": \"Testni tip evidencije\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/tip_evidencije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tip_evidencije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Pojedinačno",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/tip_evidencije/item.php?id={{tipEvidencijeId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tip_evidencije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{tipEvidencijeId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Uredi",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"naziv\": \"Izmijenjeni naziv\",\n    \"opis\": \"Izmijenjeni opis\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/tip_evidencije/item.php?id={{tipEvidencijeId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tip_evidencije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{tipEvidencijeId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Obriši (deaktiviraj)",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/tip_evidencije/item.php?id={{tipEvidencijeId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["tip_evidencije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{tipEvidencijeId}}" }]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Akcije",
+            "item": [
+                {
+                    "name": "Lista",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/akcije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["akcije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"id\": 99,\n    \"tip_id\": {{tipEvidencijeId}},\n    \"naziv\": \"Test akcija\",\n    \"opis\": \"Testna akcija\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/akcije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["akcije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Pojedinačno",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/akcije/item.php?id={{akcijaId}}&tip_id={{akcijaTipId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["akcije", "item.php"],
+                            "query": [
+                                { "key": "id", "value": "{{akcijaId}}" },
+                                { "key": "tip_id", "value": "{{akcijaTipId}}" }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Uredi",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"naziv\": \"Izmijenjeni naziv\",\n    \"opis\": \"Izmijenjeni opis\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/akcije/item.php?id={{akcijaId}}&tip_id={{akcijaTipId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["akcije", "item.php"],
+                            "query": [
+                                { "key": "id", "value": "{{akcijaId}}" },
+                                { "key": "tip_id", "value": "{{akcijaTipId}}" }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obriši (deaktiviraj)",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/akcije/item.php?id={{akcijaId}}&tip_id={{akcijaTipId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["akcije", "item.php"],
+                            "query": [
+                                { "key": "id", "value": "{{akcijaId}}" },
+                                { "key": "tip_id", "value": "{{akcijaTipId}}" }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Evidencije",
+            "item": [
+                {
+                    "name": "Lista",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/evidencije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["evidencije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj (za umirovljenika)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"umirovljenik_id\": {{umirovljenikId}},\n    \"akcija_tip_id\": {{akcijaTipId}},\n    \"akcija_id\": {{akcijaId}},\n    \"vrijednost_num\": 200\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/evidencije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["evidencije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj (za lokaciju)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"lokacija_id\": {{lokacijaId}},\n    \"akcija_tip_id\": {{akcijaTipId}},\n    \"akcija_id\": {{akcijaId}},\n    \"opis\": \"Testni opis radnje\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/evidencije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["evidencije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj - GREŠKA (bez umirovljenika i lokacije)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"akcija_tip_id\": {{akcijaTipId}},\n    \"akcija_id\": {{akcijaId}},\n    \"opis\": \"Ovo bi trebalo pasti na 400\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/evidencije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["evidencije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj - GREŠKA (bez ijedne vrijednosti)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"umirovljenik_id\": {{umirovljenikId}},\n    \"akcija_tip_id\": {{akcijaTipId}},\n    \"akcija_id\": {{akcijaId}}\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/evidencije/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["evidencije", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Pojedinačno",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/evidencije/item.php?id={{evidencijaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["evidencije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{evidencijaId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Uredi",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"vrijednost_num\": 250,\n    \"opis\": \"Ispravljena vrijednost\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/evidencije/item.php?id={{evidencijaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["evidencije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{evidencijaId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Obriši",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/evidencije/item.php?id={{evidencijaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["evidencije", "item.php"],
+                            "query": [{ "key": "id", "value": "{{evidencijaId}}" }]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Korisnici",
+            "item": [
+                {
+                    "name": "Lista",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/korisnici/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["korisnici", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"ime\": \"Novi\",\n    \"prezime\": \"Testić\",\n    \"email\": \"{{noviKorisnikEmail}}\",\n    \"lozinka\": \"lozinka123\",\n    \"uloga\": 4\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/korisnici/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["korisnici", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj - GREŠKA (isti email opet)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"ime\": \"Netko\",\n    \"prezime\": \"Drugi\",\n    \"email\": \"{{noviKorisnikEmail}}\",\n    \"lozinka\": \"lozinka123\",\n    \"uloga\": 4\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/korisnici/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["korisnici", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Pojedinačno",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/korisnici/item.php?id={{korisnikId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["korisnici", "item.php"],
+                            "query": [{ "key": "id", "value": "{{korisnikId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Uredi (bez izmjene lozinke)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"ime\": \"Izmijenjeno\",\n    \"prezime\": \"Testić\",\n    \"email\": \"{{noviKorisnikEmail}}\",\n    \"uloga\": 4\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/korisnici/item.php?id={{korisnikId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["korisnici", "item.php"],
+                            "query": [{ "key": "id", "value": "{{korisnikId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Obriši (deaktiviraj) - traži SuperAdmin",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/korisnici/item.php?id={{korisnikId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["korisnici", "item.php"],
+                            "query": [{ "key": "id", "value": "{{korisnikId}}" }]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Smjene",
+            "item": [
+                {
+                    "name": "Lista",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/smjene/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["smjene", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Dodaj",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"korisnik_id\": {{korisnikId}},\n    \"datum\": \"2026-09-10\",\n    \"smjena\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/smjene/index.php",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["smjene", "index.php"]
+                        }
+                    }
+                },
+                {
+                    "name": "Pojedinačno",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/smjene/item.php?id={{smjenaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["smjene", "item.php"],
+                            "query": [{ "key": "id", "value": "{{smjenaId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Uredi",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"korisnik_id\": {{korisnikId}},\n    \"datum\": \"2026-09-10\",\n    \"smjena\": 2\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/smjene/item.php?id={{smjenaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["smjene", "item.php"],
+                            "query": [{ "key": "id", "value": "{{smjenaId}}" }]
+                        }
+                    }
+                },
+                {
+                    "name": "Obriši",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/smjene/item.php?id={{smjenaId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["smjene", "item.php"],
+                            "query": [{ "key": "id", "value": "{{smjenaId}}" }]
+                        }
+                    }
+                }
+            ]
         }
     ]
 }
