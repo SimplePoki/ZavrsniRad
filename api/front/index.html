@@ -2,13 +2,17 @@
 <html lang="hr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dom — Evidencija njege</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
 <div class="topbar">
-  <div class="topbar-title">Dom &middot; Evidencija njege</div>
+  <div style="display:flex; align-items:center; gap:12px;">
+    <button id="menuToggleBtn" class="menu-toggle" aria-label="Izbornik"><span></span></button>
+    <div class="topbar-title">Dom &middot; Evidencija njege</div>
+  </div>
   <div class="topbar-user">
     <div class="avatar" id="avatar">?</div>
     <div class="user-info">
@@ -21,7 +25,8 @@
 </div>
 
 <div class="layout">
-  <div class="sidebar">
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <div class="sidebar" id="sidebar">
     <a href="#umirovljenici" class="nav-item" data-route="umirovljenici">Umirovljenici</a>
     <a href="#lokacije" class="nav-item" data-route="lokacije">Lokacije</a>
     <a href="#korisnici" class="nav-item" data-route="korisnici">Korisnici</a>
@@ -37,17 +42,17 @@
   </div>
 </div>
 
-<script src="js/api.js"></script>
-<script src="js/permissions.js"></script>
-<script src="js/pages/umirovljenici.js"></script>
-<script src="js/pages/lokacije.js"></script>
-<script src="js/pages/korisnici.js"></script>
-<script src="js/pages/tip_evidencije.js"></script>
-<script src="js/pages/akcije.js"></script>
-<script src="js/pages/posjeti.js"></script>
-<script src="js/pages/smjene.js"></script>
-<script src="js/pages/evidencije.js"></script>
-<script src="js/router.js"></script>
+<script src="js/api.js?v=3"></script>
+<script src="js/permissions.js?v=3"></script>
+<script src="js/pages/umirovljenici.js?v=3"></script>
+<script src="js/pages/lokacije.js?v=3"></script>
+<script src="js/pages/korisnici.js?v=3"></script>
+<script src="js/pages/tip_evidencije.js?v=3"></script>
+<script src="js/pages/akcije.js?v=3"></script>
+<script src="js/pages/posjeti.js?v=3"></script>
+<script src="js/pages/smjene.js?v=3"></script>
+<script src="js/pages/evidencije.js?v=3"></script>
+<script src="js/router.js?v=3"></script>
 <script>
 (async function () {
     const rez = await trenutniKorisnik();
@@ -72,6 +77,22 @@
 document.getElementById('logoutBtn').addEventListener('click', async function () {
     await odjava();
     window.location.href = 'login.html';
+});
+
+function zatvoriIzbornik() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarBackdrop').classList.remove('open');
+}
+
+document.getElementById('menuToggleBtn').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarBackdrop').classList.toggle('open');
+});
+
+document.getElementById('sidebarBackdrop').addEventListener('click', zatvoriIzbornik);
+
+document.querySelectorAll('.nav-item').forEach(function (el) {
+    el.addEventListener('click', zatvoriIzbornik);
 });
 </script>
 
