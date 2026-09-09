@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dom — Evidencija njege</title>
-<link rel="stylesheet" href="css/style.css?v=11">
+<link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body>
 
@@ -27,6 +27,7 @@
 <div class="layout">
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
   <div class="sidebar" id="sidebar">
+    <a href="#statistika" class="nav-item" data-route="statistika">Statistika</a>
     <a href="#umirovljenici" class="nav-item" data-route="umirovljenici">Umirovljenici</a>
     <a href="#lokacije" class="nav-item" data-route="lokacije">Lokacije</a>
     <a href="#korisnici" class="nav-item" data-route="korisnici">Korisnici</a>
@@ -42,17 +43,18 @@
   </div>
 </div>
 
-<script src="js/api.js?v=11"></script>
-<script src="js/permissions.js?v=11"></script>
-<script src="js/pages/umirovljenici.js?v=11"></script>
-<script src="js/pages/lokacije.js?v=11"></script>
-<script src="js/pages/korisnici.js?v=11"></script>
-<script src="js/pages/tip_evidencije.js?v=11"></script>
-<script src="js/pages/akcije.js?v=11"></script>
-<script src="js/pages/posjeti.js?v=11"></script>
-<script src="js/pages/smjene.js?v=11"></script>
-<script src="js/pages/evidencije.js?v=11"></script>
-<script src="js/router.js?v=11"></script>
+<script src="js/api.js?v=12"></script>
+<script src="js/permissions.js?v=12"></script>
+<script src="js/pages/statistika.js?v=12"></script>
+<script src="js/pages/umirovljenici.js?v=12"></script>
+<script src="js/pages/lokacije.js?v=12"></script>
+<script src="js/pages/korisnici.js?v=12"></script>
+<script src="js/pages/tip_evidencije.js?v=12"></script>
+<script src="js/pages/akcije.js?v=12"></script>
+<script src="js/pages/posjeti.js?v=12"></script>
+<script src="js/pages/smjene.js?v=12"></script>
+<script src="js/pages/evidencije.js?v=12"></script>
+<script src="js/router.js?v=12"></script>
 <script>
 (async function () {
     const rez = await trenutniKorisnik();

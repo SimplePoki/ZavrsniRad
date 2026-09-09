@@ -1,4 +1,5 @@
 const routes = {
+    'statistika': renderStatistika,
     'umirovljenici': renderUmirovljenici,
     'lokacije': renderLokacije,
     'korisnici': renderKorisnici,

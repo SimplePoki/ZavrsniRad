@@ -1,4 +1,5 @@
 const SIDEBAR_PERMISSIONS = {
+    'statistika': [1, 2, 3, 4],
     'umirovljenici': [1, 2, 3, 4],
     'lokacije': [1, 2,  4],
     'evidencije': [1, 2, 3, 4],
